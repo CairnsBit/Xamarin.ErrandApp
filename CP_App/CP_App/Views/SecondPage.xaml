@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:CP_App.ViewModels" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="CP_App.Views.SecondPage"
              x:Name="ErrandPage"
              Style="{StaticResource PageStyle}">
@@ -10,6 +11,12 @@
         <viewmodels:SecondViewModel/>
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ListView SelectedItem="{Binding SelectedErrand, Mode=TwoWay}"
               CachingStrategy="RecycleElement"
               BackgroundColor="Transparent"
@@ -26,12 +33,19 @@
             <DataTemplate>
                 <ViewCell>
                     <Label Padding="12,10,10,0" 
-                               Text="{Binding Key}"
-                               FontSize="15"/>
+                           Text="{Binding Key}"
+                           FontSize="15"/>
                 </ViewCell>
             </DataTemplate>
         </ListView.GroupHeaderTemplate>
-        
+
+
+
+        <ListView.Behaviors>
+            <xct:EventToCommandBehavior EventName="ItemSelected"
+                                        Command="{Binding SelectedCommand}"
+                                        EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+        </ListView.Behaviors>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

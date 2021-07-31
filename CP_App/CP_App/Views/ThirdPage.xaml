@@ -4,7 +4,6 @@
              xmlns:viewmodels="clr-namespace:CP_App.ViewModels"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="CP_App.Views.ThirdPage"
-             x:Name="ErrandPage"
              Style="{StaticResource PageStyle}">
 
 

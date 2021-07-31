@@ -11,26 +11,5 @@ namespace CP_App.Views
         {
             InitializeComponent();
         }
-
-        private async void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            var errand = ((ListView)sender).SelectedItem as Errand;
-            if (errand == null)
-                return;
-            await DisplayAlert("Errand Selected", errand.Name, "OK");
-        }
-
-        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            ((ListView)sender).SelectedItem = null;
-        }
-
-        private async void MenuItem_Clicked(object sender, System.EventArgs e)
-        {
-            var errand = ((MenuItem)sender).BindingContext as Errand;
-            if (errand == null)
-                return;
-            await DisplayAlert("Errand Favorited", errand.Name, "OK");
-        }
     }
 }
