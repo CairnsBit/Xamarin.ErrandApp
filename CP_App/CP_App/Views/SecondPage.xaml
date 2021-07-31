@@ -16,28 +16,21 @@
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCommand}"/>
+    </ContentPage.ToolbarItems>
+
     <ListView SelectedItem="{Binding SelectedErrand, Mode=TwoWay}"
+              ItemsSource="{Binding Errand}"
               CachingStrategy="RecycleElement"
               BackgroundColor="Transparent"
-              ItemsSource="{Binding ErrandGroups}"
-              IsGroupingEnabled="True"
               HasUnevenRows="True"
               SeparatorVisibility="None"
               IsPullToRefreshEnabled="True"
               IsRefreshing="{Binding IsBusy, Mode=OneWay}"
               RefreshCommand="{Binding RefreshCommand}"
               RefreshControlColor="Black">
-
-        <ListView.GroupHeaderTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Label Padding="12,10,10,0" 
-                           Text="{Binding Key}"
-                           FontSize="15"/>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.GroupHeaderTemplate>
 
 
 
@@ -46,14 +39,14 @@
                                         Command="{Binding SelectedCommand}"
                                         EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
         </ListView.Behaviors>
+        
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.ContextActions>
-                        <MenuItem Text="Favourite" 
-                                  Command="{Binding Source={x:Reference ErrandPage}, Path=BindingContext.FavoriteCommand}"
+                        <MenuItem Text="Delete"
+                                  Command="{Binding Source={x:Reference ErrandPage}, Path=BindingContext.RemoveCommand}"
                                   CommandParameter="{Binding .}"/>
-                        <MenuItem Text="Delete" />
                     </ViewCell.ContextActions>
                     <Grid Padding="10">
                         <Frame BackgroundColor="#444444" HasShadow="True" CornerRadius="10">
@@ -61,24 +54,19 @@
                                 <Image Source="{Binding Image}"/>
                                 <StackLayout VerticalOptions="Center">
                                     <Label VerticalOptions="Center" 
+                                           Text="{Binding Id, StringFormat=#{0}}"
+                                           FontSize="Small"/>
+                                    <Label VerticalOptions="Center" 
                                            Text="{Binding Name}"
                                            FontSize="Large"
                                            FontAttributes="Bold"/>
                                     <Label VerticalOptions="Center" 
                                            Text="{Binding Description}"
-                                           FontSize="Medium"
-                                           />
+                                           FontSize="Medium"/>
                                 </StackLayout>
-                                <StackLayout HorizontalOptions="EndAndExpand">
-                                    <Button Text="Favorite"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SecondViewModel}}, Path=FavoriteCommand}"
-                                            CommandParameter="{Binding .}"
-                                            HorizontalOptions="EndAndExpand"
-                                            BackgroundColor="#646904"/>
-                                    <Button Text="Delete"
-                                            HorizontalOptions="EndAndExpand"
-                                            BackgroundColor="#470b0b"/>
-                                </StackLayout>
+                                <Button Text="Delete"
+                                        HorizontalOptions="EndAndExpand"
+                                        BackgroundColor="#470b0b"/>
                             </StackLayout>
                         </Frame>
                     </Grid>

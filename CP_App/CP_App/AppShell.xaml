@@ -87,7 +87,4 @@
     <FlyoutItem Title="Errands">
         <ShellContent Route="SecondPage" ContentTemplate="{DataTemplate local:SecondPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Errands Collection View">
-        <ShellContent Route="ThirdPage" ContentTemplate="{DataTemplate local:ThirdPage}" />
-    </FlyoutItem>
 </Shell>

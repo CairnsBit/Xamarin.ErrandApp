@@ -37,15 +37,6 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView android:SwipeView.SwipeTransitionMode="Drag" Threshold="100">
-                        <SwipeView.RightItems>
-                            <SwipeItems Mode="Execute">
-                                <SwipeItem Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SecondViewModel}}, Path=FavoriteCommand}"
-                                           CommandParameter="{Binding .}"
-                                           Text="Favorite"
-                                           BackgroundColor="#646904"
-                                           />
-                            </SwipeItems>
-                        </SwipeView.RightItems>
                         <SwipeView.LeftItems>
                             <SwipeItems Mode="Execute">
                                 <SwipeItem Text="Delete"
