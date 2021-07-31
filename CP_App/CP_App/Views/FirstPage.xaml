@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CP_App.ViewModels"
+             x:Class="CP_App.Views.FirstPage"
+             Style="{StaticResource PageStyle}">
+                
+    <ContentPage.BindingContext>
+        <viewmodels:FirstViewModel/>
+    </ContentPage.BindingContext>
+        
+    <Grid RowSpacing="0"
+          ColumnSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <BoxView Color="White" />
+        <Button 
+               Command="{Binding IncreaseCount}"
+               Text="{Binding CountDisplay}"
+               BackgroundColor="White"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Padding="30,80,30,80" FontAttributes="Bold" FontSize="30"/>
+        
+        <BoxView Grid.Column="1" Color="#DFDFDF" />
+
+        <BoxView Grid.Column="2" Color="#BFBFBF" />
+
+        <BoxView Grid.Row="1" Color="#9F9F9F" />
+
+        <BoxView Grid.Row="1" Grid.Column="1" Color="#808080" />
+
+        <BoxView Grid.Row="1" Grid.Column="2" Color="#606060" />
+
+        <BoxView Grid.Row="2" Color="#404040" />
+
+        <BoxView Grid.Row="2" Grid.Column="1" Color="#202020" />
+
+        <BoxView Grid.Row="2" Grid.Column="2" Color="Black" />
+
+
+    </Grid>
+
+</ContentPage>

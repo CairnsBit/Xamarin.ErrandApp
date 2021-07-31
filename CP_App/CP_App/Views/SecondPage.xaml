@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CP_App.ViewModels" 
+             x:Class="CP_App.Views.SecondPage"
+             x:Name="ErrandPage"
+             Style="{StaticResource PageStyle}">
+    
+    <ContentPage.BindingContext>
+        <viewmodels:SecondViewModel/>
+    </ContentPage.BindingContext>
+
+    <ListView SelectedItem="{Binding SelectedErrand, Mode=TwoWay}"
+              CachingStrategy="RecycleElement"
+              BackgroundColor="Transparent"
+              ItemsSource="{Binding ErrandGroups}"
+              IsGroupingEnabled="True"
+              HasUnevenRows="True"
+              SeparatorVisibility="None"
+              IsPullToRefreshEnabled="True"
+              IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+              RefreshCommand="{Binding RefreshCommand}"
+              RefreshControlColor="Black">
+
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Label Padding="12,10,10,0" 
+                               Text="{Binding Key}"
+                               FontSize="15"/>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Favourite" 
+                                  Command="{Binding Source={x:Reference ErrandPage}, Path=BindingContext.FavoriteCommand}"
+                                  CommandParameter="{Binding .}"/>
+                        <MenuItem Text="Delete" />
+                    </ViewCell.ContextActions>
+                    <Grid Padding="10">
+                        <Frame BackgroundColor="#444444" HasShadow="True" CornerRadius="10">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Image}"/>
+                                <StackLayout VerticalOptions="Center">
+                                    <Label VerticalOptions="Center" 
+                                           Text="{Binding Name}"
+                                           FontSize="Large"
+                                           FontAttributes="Bold"/>
+                                    <Label VerticalOptions="Center" 
+                                           Text="{Binding Description}"
+                                           FontSize="Medium"
+                                           />
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand">
+                                    <Button Text="Favorite"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SecondViewModel}}, Path=FavoriteCommand}"
+                                            CommandParameter="{Binding .}"
+                                            HorizontalOptions="EndAndExpand"
+                                            BackgroundColor="#646904"/>
+                                    <Button Text="Delete"
+                                            HorizontalOptions="EndAndExpand"
+                                            BackgroundColor="#470b0b"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+        <ListView.Header>
+            <Frame BackgroundColor="#444444">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label FontAttributes="Bold" Text="Here is a list of your errands"/>
+                </StackLayout>
+            </Frame>
+        </ListView.Header>
+
+        <ListView.Footer>
+            <Frame BackgroundColor="#444444">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Footer"/>
+                </StackLayout>
+            </Frame>
+        </ListView.Footer>
+
+    </ListView>
+</ContentPage>

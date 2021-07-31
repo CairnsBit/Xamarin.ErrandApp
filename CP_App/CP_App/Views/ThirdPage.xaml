@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CP_App.ViewModels"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             x:Class="CP_App.Views.ThirdPage"
+             x:Name="ErrandPage"
+             Style="{StaticResource PageStyle}">
+
+
+    <ContentPage.BindingContext>
+        <viewmodels:SecondViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <RefreshView Command="{Binding RefreshCommand}"
+                 IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <CollectionView BackgroundColor="Transparent"
+                        IsGrouped="True"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemsLayout="VerticalList"
+                        ItemsSource="{Binding ErrandGroups}"
+                        SelectedItem="{Binding SelectedErrand, Mode=TwoWay}"
+                        SelectionMode="Single">
+            <CollectionView.EmptyView>
+                <StackLayout>
+                    <Label HorizontalOptions="Center" Text="No Errands"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Padding="12,10,10,0" Text="{Binding Key}" FontSize="15"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView android:SwipeView.SwipeTransitionMode="Drag" Threshold="100">
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SecondViewModel}}, Path=FavoriteCommand}"
+                                           CommandParameter="{Binding .}"
+                                           Text="Favorite"
+                                           BackgroundColor="#646904"
+                                           />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="#470b0b"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <Grid Padding="10">
+                            <Frame BackgroundColor="#444444" HasShadow="True" Margin="-10,0,-10,0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Image}"/>
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label VerticalOptions="Center" 
+                                           Text="{Binding Name}"
+                                           FontSize="Large"
+                                           FontAttributes="Bold"/>
+                                        <Label VerticalOptions="Center" 
+                                           Text="{Binding Description}"
+                                           FontSize="Medium"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.Header>
+                <Frame BackgroundColor="#444444">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label FontAttributes="Bold" Text="Here is a list of your errands"/>
+                    </StackLayout>
+                </Frame>
+            </CollectionView.Header>
+
+            <CollectionView.Footer>
+                <Frame BackgroundColor="#444444">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Footer"/>
+                    </StackLayout>
+                </Frame>
+            </CollectionView.Footer>
+
+        </CollectionView>
+    </RefreshView>
+
+
+
+
+
+
+
+
+</ContentPage>

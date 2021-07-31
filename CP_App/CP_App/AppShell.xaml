@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:CP_App.Views"
+       Title="CP_App"
+       x:Class="CP_App.AppShell"
+       FlyoutBackgroundColor="{AppThemeBinding Dark=#444444, Light={StaticResource Light}}">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{AppThemeBinding Dark={StaticResource Dark}, Light={StaticResource Light}}" />
+                <Setter Property="Shell.ForegroundColor" Value="{AppThemeBinding Dark={StaticResource Light}, Light={StaticResource Dark}}" />
+                <Setter Property="Shell.TitleColor" Value="{AppThemeBinding Dark={StaticResource Light}, Light={StaticResource Dark}}" />
+                <Setter Property="Shell.DisabledColor" Value="green" />
+                <Setter Property="Shell.UnselectedColor" Value="green" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="green" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="green"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="green"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="darkgreen"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+
+
+
+
+
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource Light}, Light={StaticResource Dark}}"></Setter>
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=#333333, Light=#ededed}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{AppThemeBinding Dark={StaticResource Light}, Light={StaticResource Dark}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=#222222, Light=LightGray}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{AppThemeBinding Dark={StaticResource Light}, Light={StaticResource Dark}}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="#171717"
+                  HeightRequest="200">
+                <Image Aspect="AspectFill"
+                       Source="clown.png"
+                       Opacity="0.6" />
+                <Label Text="Monke"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <FlyoutItem Title="Buttons">
+        <ShellContent Route="FirstPage" ContentTemplate="{DataTemplate local:FirstPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Errands">
+        <ShellContent Route="SecondPage" ContentTemplate="{DataTemplate local:SecondPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Errands Collection View">
+        <ShellContent Route="ThirdPage" ContentTemplate="{DataTemplate local:ThirdPage}" />
+    </FlyoutItem>
+</Shell>
