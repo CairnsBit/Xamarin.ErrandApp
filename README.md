@@ -1,6 +1,11 @@
 # ErrandApp
 A simple app for tracking any sort of task/errand
 
+## About
+
+* This is my first Xamarin project, learning was my main focus
+* Built with MVVM architecture
+
 ## Functions
 
 * A ListView/CollectionView of items using basic CRUD connected to a local SQLite database
