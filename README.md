@@ -8,7 +8,7 @@ A simple app for tracking any sort of task/errand
 
 ## Functions
 
-* A ListView/CollectionView of items using basic CRUD connected to a local SQLite database
+* A ListView/CollectionView of items using CRUD model connected to a local SQLite database
 * Dark/light theme based on your devices setting
 * ...
 
