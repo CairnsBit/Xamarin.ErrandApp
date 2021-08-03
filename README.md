@@ -1,6 +1,10 @@
 # ErrandApp
 A simple app for tracking any sort of task/errand
 
+## About
+
+* WIP
+
 ## Functions
 
 * A ListView/CollectionView of items using basic CRUD connected to a local SQLite database
